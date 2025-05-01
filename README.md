@@ -18,7 +18,9 @@ The **Periodic Table App** is a modern, responsive web application that displays
 - **JavaScript** – for dynamic interactions and logic.
 
 ## Getting Started
+## View
 
+https://best-wale.github.io/Peroidic_table/
 ### Prerequisites
 
 Make sure you have Git installed on your machine to clone the repository. You will also need a modern web browser (such as Chrome, Firefox, or Edge) to run the app.
