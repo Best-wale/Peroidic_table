@@ -28,4 +28,4 @@ Make sure you have Git installed on your machine to clone the repository. You wi
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/periodic-table-app.git
+   git clone https://github.com/Best-wale/Peroidic_table.git
