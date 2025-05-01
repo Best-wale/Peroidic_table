@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Periodic Table of Elements</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+         <script src="plugin.js"></script>
+        <link rel="stylesheet" href="main.css">
+        
+    </head>
+
+    <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-6">
+                <h1 class="text-3xl font-bold text-center text-primary dark:text-primary">Periodic Table of Elements
+                </h1>
+                <div class="my-4 relative">
+                    <input type="text" id="search" placeholder="Search by element name, symbol, or atomic number"
+                        class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-primary">
+                    <div id="search-results"
+                        class="absolute z-20 bg-white dark:bg-gray-800 w-full mt-1 rounded-lg shadow-lg border border-gray-300 dark:border-gray-700 max-h-60 overflow-y-auto hidden">
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 justify-center my-4">
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-alkali"></span>
+                        <span class="text-xs">Alkali Metal</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-alkaline"></span>
+                        <span class="text-xs">Alkaline Earth</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-transition"></span>
+                        <span class="text-xs">Transition Metal</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-post"></span>
+                        <span class="text-xs">Post-Transition</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-metalloid"></span>
+                        <span class="text-xs">Metalloid</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-nonmetal"></span>
+                        <span class="text-xs">Nonmetal</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-halogen"></span>
+                        <span class="text-xs">Halogen</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-noble"></span>
+                        <span class="text-xs">Noble Gas</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-lanthanide"></span>
+                        <span class="text-xs">Lanthanide</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-4 h-4 bg-actinide"></span>
+                        <span class="text-xs">Actinide</span>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div class="overflow-x-auto mb-4">
+                    <div id="periodic-table" class="periodic-table grid gap-1 min-w-[900px]"></div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="grid grid-cols-1 gap-1">
+                        <div class="lanthanide-row grid gap-1 ml-[135px]" id="lanthanide-row"></div>
+                        <div class="actinide-row grid gap-1 ml-[135px]" id="actinide-row"></div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Element Detail Modal -->
+            <div id="element-modal"
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center">
+                            <div id="modal-symbol-container"
+                                class="w-16 h-16 rounded-lg flex items-center justify-center mr-4">
+                                <span id="modal-symbol" class="text-3xl font-bold text-white"></span>
+                            </div>
+                            <div>
+                                <h2 id="modal-name" class="text-2xl font-bold"></h2>
+                                <p id="modal-category" class="text-sm"></p>
+                            </div>
+                        </div>
+                        <button id="close-modal"
+                            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Atomic Number</p>
+                            <p id="modal-number" class="font-semibold"></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Atomic Mass</p>
+                            <p id="modal-mass" class="font-semibold"></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Period</p>
+                            <p id="modal-period" class="font-semibold"></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Group</p>
+                            <p id="modal-group" class="font-semibold"></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Electron Configuration</p>
+                        <p id="modal-electron" class="font-semibold"></p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Description</p>
+                        <p id="modal-description" class="text-sm"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+
+</html>
